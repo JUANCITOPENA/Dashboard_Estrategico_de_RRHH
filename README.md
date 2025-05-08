@@ -77,12 +77,15 @@ El dashboard ofrece una vista consolidada del estado de la plantilla, rotación,
 
 ## 📁 Estructura de Archivos
 
+## 📁 Estructura de Archivos
+
+```text
 /proyecto-dashboard-rrhh/
-├── index.html # Archivo principal HTML (estructura y contenido)
-├── style.css # Hoja de estilos CSS (apariencia y layout)
-├── script.js # Lógica principal JavaScript (carga de datos, KPIs, gráficos, interacciones)
-└── /base de datos/
-└── rrhh_empleados_mejorado.json # Fuente de datos simulada o real
+├── index.html         # Archivo principal HTML (estructura y contenido)
+├── style.css          # Hoja de estilos CSS (apariencia y layout)
+├── script.js          # Lógica principal JavaScript (carga de datos, KPIs, gráficos, interacciones)
+└── base de datos/
+    └── rrhh_empleados_mejorado.json # Fuente de datos simulada o real
 ---
 
 ## 💡 Notas del Código
