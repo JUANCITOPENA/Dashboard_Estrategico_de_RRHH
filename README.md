@@ -6,6 +6,8 @@ Este proyecto presenta un dashboard interactivo y visualmente atractivo diseñad
 
 El dashboard ofrece una vista consolidada del estado de la plantilla, rotación, compensación, desempeño, demografía y otros aspectos cruciales para la gestión del talento.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) <!-- Opcional: Añade un badge de licencia si aplica -->
+
 ---
 
 ## ✨ Características Principales
@@ -122,6 +124,49 @@ El archivo `base de datos/rrhh_empleados_mejorado.json` es la fuente de informac
 * ✅ Añadir análisis predictivos básicos (ej. predicción de rotación).
 * ✅ Integración con una base de datos real o API en lugar de un JSON estático.
 * ✅ Optimización avanzada del rendimiento para datasets extremadamente grandes.
+
+---
+
+## 🚀 Cómo Empezar
+
+Es muy sencillo poner en marcha este dashboard:
+
+1.  **Clona o Descarga el Repositorio:**
+    ```bash
+    git clone https://github.com/tu-usuario/tu-repositorio.git
+    # O descarga el archivo ZIP y descomprímelo.
+    ```
+2.  **Abre el Archivo:** Navega hasta la carpeta del proyecto y abre el archivo `index.html` directamente en tu navegador web preferido (Chrome, Firefox, Edge, etc.).
+
+¡Eso es todo! No se requiere instalación de dependencias ni servidor backend para esta versión.
+
+## 🌐 Colabora, Comparte y Conecta
+
+¡Tu contribución es bienvenida! Si tienes ideas para mejorar, encuentras un error o quieres añadir nuevas funcionalidades:
+
+1.  Crea un **Issue** para discutir el cambio.
+2.  Haz un **Fork** del repositorio.
+3.  Crea tu **rama de funcionalidad** (`git checkout -b feature/AmazingFeature`).
+4.  Realiza tus **cambios** y haz **commit** (`git commit -m 'Add some AmazingFeature'`).
+5.  Haz **Push** a tu rama (`git push origin feature/AmazingFeature`).
+6.  Abre un **Pull Request**.
+
+## ⭐ ¡Apoya el Proyecto!
+
+Si encuentras útil este dashboard o te ha servido para aprender, ¡considera darle una estrella ⭐ al repositorio en GitHub! Significa mucho y ayuda a dar visibilidad al proyecto.
+
+## 📄 Licencia
+
+Este proyecto se distribuye bajo la Licencia MIT. Consulta el archivo `LICENSE` (si existe) para más detalles.
+
+## 👋 Conecta Conmigo
+
+¡Me encantaría saber tu opinión o conectar! Encuéntrame en:
+
+*   **LinkedIn:** [Tu Perfil de LinkedIn](https://linkedin.com/in/tu-usuario)
+*   **GitHub:** [Tu Perfil de GitHub](https://github.com/tu-usuario)
+*   **Sitio Web / Portfolio:** [Tu Sitio Web](https://tu-sitio.com)
+*   *(Otras redes sociales relevantes)*
 
 ---
 
