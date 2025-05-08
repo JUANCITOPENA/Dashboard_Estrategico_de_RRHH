@@ -125,4 +125,4 @@ El archivo `base de datos/rrhh_empleados_mejorado.json` es la fuente de informac
 
 ---
 
-👨‍💻 **Autor:** Juancito Pena (¡Añade tu información de contacto si quieres!)
+👨‍💻 **Autor:** Juancito Pena.
