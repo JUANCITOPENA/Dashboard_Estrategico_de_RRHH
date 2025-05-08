@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Estratégico de RRHH</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="logo-title">
+        <i class="fas fa-users-cog header-icon"></i>
+        <h1>Dashboard Estratégico de RRHH</h1>
+        <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Logo Usuario" class="header-user-avatar"> 
+      </div>
+      <div class="controls">
+        <div class="date-range-info">
+          Datos del <span id="dataPeriodStart"></span> al <span id="dataPeriodEnd"></span>
+        </div>
+        <button id="toggleModeBtn" aria-label="Cambiar modo claro/oscuro">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+       <section class="executive-summary card-style"> 
+        <h2><i class="fas fa-file-alt"></i> Resumen Ejecutivo del Periodo</h2>
+        <div id="executiveSummaryContent">
+          <p>Calculando resumen...</p> 
+        </div>
+      </section>
+
+      <section class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-venus-mars"></i> Género (Activos)</h3><canvas id="chartGenero"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-sitemap"></i> Empleados Activos por Depto.</h3><canvas id="chartDepartamento"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Tipos de Salida (Periodo)</h3><canvas id="chartTiposSalida"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-sign-out-alt"></i> Motivos de Salida Principales</h3><canvas id="chartMotivosSalida"></canvas></div>
+        
+        <div class="chart-card"><h3><i class="fas fa-wallet"></i> Distribución Salarios (Activos)</h3><canvas id="chartSalariosDist"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-tachometer-alt"></i> Distribución Desempeño (Activos)</h3><canvas id="chartDesempenoDist"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-history"></i> Distribución Antigüedad (Activos)</h3><canvas id="chartAntiguedad"></canvas></div>
+        <div class="chart-card"><h3><i class="fas fa-briefcase"></i> Tipos de Contrato (Activos)</h3><canvas id="chartTipoContrato"></canvas></div>
+
+        <div class="chart-card full-width"><h3><i class="fas fa-chart-area"></i> Tasa de Rotación Mensual (Periodo)</h3><canvas id="chartRotacionMensual"></canvas></div>
+        <div class="chart-card full-width">
+            <h3><i class="fas fa-balance-scale"></i> Salario Promedio por Nivel de Desempeño (Activos)</h3>
+            <canvas id="chartAvgSalarioPorNivelDesempeno"></canvas>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <div class="table-header">
+            <h2><i class="fas fa-table"></i> Detalle de Empleados</h2>
+            <div class="filters">
+              <input type="text" id="searchInput" placeholder="🔍 Buscar..." aria-label="Buscar empleados">
+              <select id="filterDepartamento" aria-label="Filtrar por departamento">
+                <option value="">Todos los Departamentos</option>
+              </select>
+              <select id="filterEstadoActual" aria-label="Filtrar por estado actual">
+                <option value="">Todos los Estados</option>
+                <!-- Opciones generadas por JS -->
+              </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre Completo</th>
+                <th>Edad</th>
+                <th>Depto.</th>
+                <th>Cargo</th>
+                <th>Contrato</th>
+                <th>Ingreso</th>
+                <th>Antigüedad</th>
+                <th>Salario Base</th>
+                <th>Desempeño</th>
+                <th>Estado</th>
+                <th>Fecha Salida</th>
+                <th>Motivo Salida</th>
+              </tr>
+            </thead>
+            <tbody id="employeeTableBody">
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button id="prevPageBtn" disabled aria-label="Página anterior"><i class="fas fa-chevron-left"></i> Anterior</button>
+          <span id="pageInfo" aria-live="polite">Página 1 de 1</span>
+          <button id="nextPageBtn" disabled aria-label="Siguiente página">Siguiente <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="dashboard-footer">
+      <div class="footer-content">
+        <p class="copyright">© <span id="currentYear"></span> Juancito Pena. - Dashboard de RRHH. Todos los derechos reservados.</p>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/juancitope%C3%B1a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCSob-3E5z4IHtMF5B4bN-FA" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://github.com/JUANCITOPENA" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.instagram.com/juancito.pena.v/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

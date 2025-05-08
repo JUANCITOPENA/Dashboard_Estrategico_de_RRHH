@@ -1,0 +1,827 @@
+:root {
+    /* Light Mode Palette */
+    --primary-color-light: #0052cc; /* Azul más profundo y profesional */
+    --secondary-color-light: #5E6C7F; /* Gris azulado para texto secundario */
+    --success-color-light: #00875A;  /* Verde oscuro */
+    --danger-color-light: #DE350B;   /* Rojo intenso */
+    --warning-color-light: #FFAB00;  /* Amarillo-Naranja */
+    --info-color-light: #00B8D9;     /* Cian brillante */
+    
+    --bg-light: #F4F5F7; /* Gris muy claro para fondo general */
+    --text-light: #172B4D; /* Azul oscuro casi negro para texto principal */
+    --card-bg-light: #FFFFFF;
+    --border-light: #DFE1E6; /* Borde sutil */
+  
+    /* Dark Mode Palette */
+    --primary-color-dark: #579DFF; /* Azul más brillante para modo oscuro */
+    --secondary-color-dark: #A6B1C2;
+    --success-color-dark: #36B37E;
+    --danger-color-dark: #FF5630;
+    --warning-color-dark: #FFAB00; /* Mismo amarillo, destaca bien */
+    --info-color-dark: #79E2F2;
+  
+    --bg-dark: #0d1117; /* Fondo GitHub Dark */
+    --text-dark: #C9D1D9; /* Texto GitHub Dark */
+    --card-bg-dark: #161b22; /* Fondo de tarjeta GitHub Dark */
+    --border-dark: #30363d; /* Borde GitHub Dark */
+  
+    --font-family-primary: 'Roboto', 'Open Sans', sans-serif;
+    --font-family-data: 'Open Sans', sans-serif;
+    --border-radius: 6px;
+    --box-shadow: 0 2px 8px rgba(23, 43, 77, 0.1); /* Sombra más suave */
+    --transition-speed: 0.25s ease-in-out;
+
+      /* Clases para métricas condicionales */
+  --metric-good-light: var(--success-color-light);
+  --metric-bad-light: var(--danger-color-light);
+  --metric-neutral-light: var(--secondary-color-light);
+
+  --metric-good-dark: var(--success-color-dark);
+  --metric-bad-dark: var(--danger-color-dark);
+  --metric-neutral-dark: var(--secondary-color-dark);
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden; /* Previene scroll horizontal si algo se desborda un poco */
+  }
+  
+  /* Header */
+  .dashboard-header {
+    background-color: var(--primary-color-light);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  body.dark-mode .dashboard-header {
+    background-color: var(--card-bg-dark);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  
+  .logo-title {
+    display: flex;
+    align-items: center;
+  }
+  .logo-title .header-icon {
+    font-size: 1.8rem;
+    margin-right: 0.75rem;
+    color: #FFD700; /* Gold accent for icon */
+  }
+  body.dark-mode .logo-title .header-icon {
+    color: var(--primary-color-dark);
+  }
+  .dashboard-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+  }
+  body.dark-mode .dashboard-header h1 {
+      color: var(--text-dark);
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .date-range-info {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  body.dark-mode .date-range-info {
+      color: var(--secondary-color-dark);
+  }
+  /* Asegurar que el contenedor use Flexbox para alinear elementos horizontalmente */
+.logo-title {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el icono, el h1 y la imagen */
+  gap: 0.75rem; /* Espacio entre el icono, el h1 y la imagen */
+}
+
+/* Estilos específicos para la nueva imagen */
+.header-user-avatar {
+  height: 30px; /* Ajusta la altura según necesites */
+  width: 30px;  /* Mismo valor que height para que sea cuadrada */
+  border-radius: 50%; /* Hace la imagen circular (típico para avatares) */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Borde sutil opcional (visible en modo claro) */
+}
+
+/* Ajuste opcional para el borde en modo oscuro */
+body.dark-mode .header-user-avatar {
+  border-color: var(--border-dark); /* Usa el color de borde del modo oscuro */
+}
+
+/* (Opcional) Si quieres ajustar el tamaño del icono/h1 para que coincidan mejor */
+.logo-title .header-icon {
+  font-size: 1.6rem; /* Ligeramente más pequeño si es necesario */
+  /* ... otros estilos existentes ... */
+}
+.dashboard-header h1 {
+  margin: 0; /* Asegúrate de que no tenga márgenes extra */
+  /* ... otros estilos existentes ... */
+}
+  /* Estilo General para Tarjetas (Si no tienes uno ya) */
+.card-style {
+  background-color: var(--card-bg-light);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: background-color var(--transition-speed);
+  margin-bottom: 2rem; /* Espacio debajo de esta sección */
+}
+body.dark-mode .card-style {
+  background-color: var(--card-bg-dark);
+}
+
+/* Estilos para la sección Resumen Ejecutivo */
+.executive-summary h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: var(--primary-color-light);
+  display: flex;
+  align-items: center;
+}
+.executive-summary h2 i {
+  margin-right: 0.75rem;
+  color: var(--primary-color-light);
+}
+body.dark-mode .executive-summary h2,
+body.dark-mode .executive-summary h2 i {
+   color: var(--primary-color-dark);
+}
+
+#executiveSummaryContent p {
+  line-height: 1.7;
+  margin-bottom: 0.8rem; /* Espacio entre párrafos */
+  font-size: 0.95rem;
+}
+#executiveSummaryContent strong { /* Resaltar números clave */
+    font-weight: 700;
+}
+
+/* Estilos para las métricas dentro del texto */
+#executiveSummaryContent .metric {
+  font-weight: 700; /* Hacer los números más visibles */
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  white-space: nowrap; /* Evitar que el emoji y número se separen */
+}
+
+#executiveSummaryContent .metric-good {
+  color: var(--metric-good-light);
+  background-color: rgba(0, 135, 90, 0.1); /* Fondo verde claro traslúcido */
+}
+#executiveSummaryContent .metric-bad {
+  color: var(--metric-bad-light);
+   background-color: rgba(222, 53, 11, 0.1); /* Fondo rojo claro traslúcido */
+}
+#executiveSummaryContent .metric-neutral {
+  color: var(--metric-neutral-light);
+   background-color: rgba(94, 108, 127, 0.1); /* Fondo gris claro traslúcido */
+}
+
+body.dark-mode #executiveSummaryContent .metric-good {
+  color: var(--metric-good-dark);
+  background-color: rgba(54, 179, 126, 0.15);
+}
+body.dark-mode #executiveSummaryContent .metric-bad {
+  color: var(--metric-bad-dark);
+  background-color: rgba(255, 86, 48, 0.15);
+}
+body.dark-mode #executiveSummaryContent .metric-neutral {
+  color: var(--metric-neutral-dark);
+   background-color: rgba(166, 177, 194, 0.15);
+}
+  #toggleModeBtn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #toggleModeBtn:hover {
+    background-color: rgba(255,255,255,0.25);
+  }
+  body.dark-mode #toggleModeBtn {
+    background: var(--border-dark);
+    border-color: var(--secondary-color-dark);
+    color: var(--text-dark);
+  }
+  body.dark-mode #toggleModeBtn:hover {
+    background-color: var(--secondary-color-dark);
+    color: var(--bg-dark);
+  }
+  
+  /* Main Content */
+  .dashboard-main {
+    flex-grow: 1;
+    padding: 1.5rem; 
+  }
+  
+  /* KPI Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
+    gap: 1.25rem; 
+    margin-bottom: 2rem;
+  }
+  
+  .kpi-card {
+    background-color: var(--card-bg-light);
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed), transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    border-left: 4px solid var(--primary-color-light);
+    display: flex;
+    flex-direction: column;
+  }
+  .kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(23, 43, 77, 0.12);
+  }
+  body.dark-mode .kpi-card {
+    background-color: var(--card-bg-dark);
+    border-left-color: var(--primary-color-dark);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  }
+  body.dark-mode .kpi-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .kpi-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem; 
+    color: var(--secondary-color-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  .kpi-card h3 i {
+    margin-right: 0.5rem;
+    font-size: 1rem; 
+    color: var(--primary-color-light);
+    width: 20px; 
+    text-align: center;
+  }
+  body.dark-mode .kpi-card h3 {
+    color: var(--secondary-color-dark);
+  }
+  body.dark-mode .kpi-card h3 i {
+    color: var(--primary-color-dark);
+  }
+  
+  .kpi-value {
+    font-size: 1.8rem; 
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    color: var(--text-light);
+    font-family: var(--font-family-data);
+  }
+  body.dark-mode .kpi-value {
+    color: var(--text-dark);
+  }
+  
+  .kpi-card small {
+    font-size: 0.75rem;
+    color: var(--secondary-color-light);
+    opacity: 0.8;
+    margin-top: auto; 
+  }
+  body.dark-mode .kpi-card small {
+    color: var(--secondary-color-dark);
+  }
+  
+  /* KPI Specific Colors */
+  .kpi-card:nth-child(4n+1) { border-left-color: var(--primary-color-light); }
+  .kpi-card:nth-child(4n+1) h3 i { color: var(--primary-color-light); }
+  .kpi-card:nth-child(4n+2) { border-left-color: var(--success-color-light); }
+  .kpi-card:nth-child(4n+2) h3 i { color: var(--success-color-light); }
+  .kpi-card:nth-child(4n+3) { border-left-color: var(--warning-color-light); }
+  .kpi-card:nth-child(4n+3) h3 i { color: var(--warning-color-light); }
+  .kpi-card:nth-child(4n+4) { border-left-color: var(--info-color-light); }
+  .kpi-card:nth-child(4n+4) h3 i { color: var(--info-color-light); }
+  
+  body.dark-mode .kpi-card:nth-child(4n+1) { border-left-color: var(--primary-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+1) h3 i { color: var(--primary-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+2) { border-left-color: var(--success-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+2) h3 i { color: var(--success-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+3) { border-left-color: var(--warning-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+3) h3 i { color: var(--warning-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+4) { border-left-color: var(--info-color-dark); }
+  body.dark-mode .kpi-card:nth-child(4n+4) h3 i { color: var(--info-color-dark); }
+  /* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado para que no sean demasiado pequeños */
+    gap: 1.5rem; /* Un poco más de espacio */
+    margin-bottom: 2rem;
+  }
+  
+  .chart-card {
+    background-color: var(--card-bg-light);
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed);
+    
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+  
+    /* --- NUEVOS AJUSTES CRÍTICOS --- */
+    height: 350px; /* Prueba con una altura fija para empezar */
+    /* O alternativamente, si prefieres que se adapten más al contenido pero con un límite: */
+    /* min-height: 300px; */
+    /* max-height: 450px; */ /* Evita que crezcan demasiado si el contenido es pequeño */
+    overflow: hidden; /* Ayuda a prevenir desbordamientos del canvas si algo sale mal */
+  }
+  
+  .chart-card.full-width {
+    grid-column: 1 / -1;
+    height: 400px; /* Altura ligeramente mayor para gráficos anchos */
+    /* min-height: 350px; */
+    /* max-height: 500px; */
+  }
+  
+  body.dark-mode .chart-card {
+    background-color: var(--card-bg-dark);
+  }
+  
+  .chart-card h3 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    flex-shrink: 0; 
+  }
+  .chart-card h3 i {
+    margin-right: 0.5rem;
+    color: var(--secondary-color-light);
+  }
+  body.dark-mode .chart-card h3 {
+    color: var(--text-dark);
+  }
+  body.dark-mode .chart-card h3 i {
+    color: var(--secondary-color-dark);
+  }
+  
+  .chart-card canvas {
+    /* El canvas debe ocupar el espacio que le deja el contenedor flex */
+    flex-grow: 1;
+    /* Estas propiedades son importantes para que Chart.js no se confunda */
+    width: 100% !important;  /* Forzar ancho */
+    height: 100% !important; /* Forzar alto (relativo al espacio que le da flex-grow) */
+    display: block; /* Elimina espacio extra debajo del canvas si es inline */
+    max-width: 100%; /* Redundante con width: 100%, pero no hace daño */
+  }
+  
+  /* Table Section */
+  .table-section {
+    background-color: var(--card-bg-light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed);
+  }
+  body.dark-mode .table-section {
+    background-color: var(--card-bg-dark);
+  }
+  
+  .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+  }
+  .table-header h2 {
+    margin-top: 0;
+    margin-bottom: 0; 
+    font-size: 1.25rem;
+  }
+  .table-header h2 i {
+    margin-right: 0.5rem;
+  }
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem; 
+  }
+  .filters input, .filters select {
+    padding: 0.5rem 0.75rem; 
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    font-family: var(--font-family-primary);
+    background-color: var(--card-bg-light);
+    color: var(--text-light);
+    font-size: 0.9rem;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  .filters input:focus, .filters select:focus {
+      outline: none;
+      border-color: var(--primary-color-light);
+      box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.3);
+  }
+  body.dark-mode .filters input, body.dark-mode .filters select {
+    background-color: var(--card-bg-dark); 
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+  }
+  body.dark-mode .filters input:focus, body.dark-mode .filters select:focus {
+      border-color: var(--primary-color-dark);
+      box-shadow: 0 0 0 2px rgba(87, 157, 255, 0.3);
+  }
+  .filters input { flex-grow: 1; min-width: 180px;}
+  .filters select { min-width: 160px; }
+  
+  .table-responsive {
+    overflow-x: auto;
+    width: 100%;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; 
+  }
+  th, td {
+    padding: 0.6rem 0.8rem; 
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+    white-space: nowrap;
+  }
+  body.dark-mode th, body.dark-mode td {
+    border-bottom-color: var(--border-dark);
+  }
+  th {
+    background-color: var(--bg-light); 
+    font-weight: 600;
+    color: var(--secondary-color-light);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    position: sticky; /* Para que la cabecera se quede al hacer scroll vertical en la tabla */
+    top: 0;
+    z-index: 10;
+  }
+  body.dark-mode th {
+    background-color: #21262d; 
+    color: var(--secondary-color-dark);
+  }
+  tr:hover td { 
+    background-color: #EBF8FF; 
+  }
+  body.dark-mode tr:hover td {
+    background-color: rgba(87, 157, 255, 0.1); 
+  }
+  tr.inactive-row td {
+      color: var(--secondary-color-light);
+      font-style: italic;
+      opacity: 0.7;
+  }
+  body.dark-mode tr.inactive-row td {
+      color: var(--secondary-color-dark);
+  }
+  
+  
+  /* Status indicators in table */
+  .status-activo { color: var(--success-color-light); font-weight: 600; }
+  .status-renuncia, .status-despido, .status-jubilación, .status-fin_de_contrato { 
+      color: var(--danger-color-light); 
+      font-weight: 500; 
+  }
+  
+  body.dark-mode .status-activo { color: var(--success-color-dark); }
+  body.dark-mode .status-renuncia, 
+  body.dark-mode .status-despido, 
+  body.dark-mode .status-jubilación,
+  body.dark-mode .status-fin_de_contrato { color: var(--danger-color-dark); }
+  
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .pagination button {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--primary-color-light);
+    background-color: transparent;
+    color: var(--primary-color-light);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-speed);
+    font-size: 0.9rem;
+  }
+  .pagination button:disabled {
+    border-color: var(--secondary-color-light);
+    color: var(--secondary-color-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .pagination button:not(:disabled):hover {
+    background-color: var(--primary-color-light);
+    color: white;
+  }
+  body.dark-mode .pagination button {
+    border-color: var(--primary-color-dark);
+    color: var(--primary-color-dark);
+  }
+  body.dark-mode .pagination button:disabled {
+    border-color: var(--secondary-color-dark);
+    color: var(--secondary-color-dark);
+  }
+  body.dark-mode .pagination button:not(:disabled):hover {
+    background-color: var(--primary-color-dark);
+    color: var(--bg-dark);
+  }
+  .pagination button i {
+    margin: 0 0.2rem;
+  }
+  #pageInfo {
+      font-size: 0.9rem;
+      color: var(--secondary-color-light);
+  }
+  body.dark-mode #pageInfo {
+      color: var(--secondary-color-dark);
+  }
+  
+  /* Footer */
+  .dashboard-footer {
+    text-align: center;
+    padding: 1.25rem;
+    background-color: var(--card-bg-light);
+    color: var(--secondary-color-light);
+    margin-top: auto;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.85rem;
+  }
+  body.dark-mode .dashboard-footer {
+    background-color: var(--card-bg-dark);
+    color: var(--secondary-color-dark);
+    border-top-color: var(--border-dark);
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 1200px) {
+    .kpi-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  @media (max-width: 992px) {
+      .charts-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+  }
+  @media (max-width: 768px) {
+    .dashboard-header {
+      padding: 0.8rem 1rem;
+    }
+    .dashboard-header h1 {
+      font-size: 1.2rem;
+    }
+    .logo-title .header-icon {
+      font-size: 1.5rem;
+    }
+    .dashboard-main {
+      padding: 1rem;
+    }
+    .kpi-grid, .charts-grid {
+      gap: 1rem;
+    }
+    .table-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .filters {
+      flex-direction: column;
+      width: 100%;
+    }
+    .filters input, .filters select {
+      width: 100%;
+    }
+    .pagination {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 480px) {
+      .kpi-value { font-size: 1.6rem; }
+      .kpi-card h3 { font-size: 0.85rem; }
+      .dashboard-header { flex-direction: column; gap: 0.5rem; }
+      .controls { width: 100%; justify-content: space-between; }
+  }
+
+  /* Footer - Estilos existentes y nuevos */
+.dashboard-footer {
+  text-align: center;
+  padding: 1.5rem 1rem; /* Aumentar padding vertical un poco */
+  background-color: var(--card-bg-light);
+  color: var(--secondary-color-light);
+  margin-top: auto;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.85rem;
+}
+body.dark-mode .dashboard-footer {
+  background-color: var(--card-bg-dark);
+  color: var(--secondary-color-dark);
+  border-top-color: var(--border-dark);
+}
+
+/* Contenedor del contenido del footer para mejor layout */
+.footer-content {
+    display: flex;
+    flex-direction: column; /* Apilado por defecto */
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem; /* Espacio entre el texto y los iconos */
+}
+
+.copyright {
+    margin: 0; /* Quitar margen por defecto del párrafo */
+}
+
+/* Contenedor de iconos sociales */
+.social-icons {
+  display: flex; /* Coloca los iconos en línea */
+  gap: 1rem; /* Espacio entre iconos */
+  margin-top: 0.5rem; /* Pequeño espacio arriba si están debajo del texto */
+}
+
+/* Estilo de los enlaces de iconos */
+.social-icons a {
+  color: var(--secondary-color-light); /* Color inicial del icono */
+  font-size: 1.4rem; /* Tamaño del icono */
+  transition: color var(--transition-speed), transform var(--transition-speed);
+  text-decoration: none; /* Quitar subrayado de enlace */
+}
+body.dark-mode .social-icons a {
+   color: var(--secondary-color-dark);
+}
+
+/* Efecto hover en los iconos */
+.social-icons a:hover {
+  color: var(--primary-color-light); /* Cambia al color primario en hover */
+  transform: scale(1.1); /* Ligeramente más grande en hover */
+}
+body.dark-mode .social-icons a:hover {
+   color: var(--primary-color-dark);
+}
+
+/* Media query para poner texto e iconos en la misma línea en pantallas más grandes */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row; /* Lado a lado en pantallas anchas */
+        justify-content: space-between; /* Espacio entre texto e iconos */
+    }
+    .social-icons {
+        margin-top: 0; /* Quitar margen superior cuando están al lado */
+    }
+}
+
+
+/* --- ESTILOS EXISTENTES --- */
+
+/* ... otros estilos ... */
+
+/* Estilo para el botón de descarga */
+#downloadPdfBtn {
+  background-color: var(--success-color-light); /* Verde para acción positiva */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem; /* Similar a otros botones */
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem; /* Ligeramente más pequeño */
+  transition: var(--transition-speed);
+  display: inline-flex; /* Para alinear icono y texto */
+  align-items: center;
+  gap: 0.5rem;
+}
+#downloadPdfBtn:hover {
+  opacity: 0.85;
+}
+#downloadPdfBtn:disabled {
+  background-color: var(--secondary-color-light);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+body.dark-mode #downloadPdfBtn {
+  background-color: var(--success-color-dark);
+}
+body.dark-mode #downloadPdfBtn:disabled {
+  background-color: var(--secondary-color-dark);
+}
+
+/* Ocultar texto en pantallas pequeñas (opcional) */
+@media (max-width: 768px) {
+  #downloadPdfBtn .btn-text {
+    display: none; 
+  }
+   #downloadPdfBtn {
+    padding: 0.5rem 0.7rem; /* Hacerlo más cuadrado */
+  }
+}
+
+/* Estilo para indicar carga */
+#downloadPdfBtn.loading {
+    background-color: var(--warning-color-light);
+}
+body.dark-mode #downloadPdfBtn.loading {
+    background-color: var(--warning-color-dark);
+}
+#downloadPdfBtn.loading i {
+    animation: spin 1s linear infinite; /* Animación de giro */
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Estilos para impresión (opcional pero recomendado) */
+@media print {
+  body {
+    /* Resetear colores para impresión si es necesario */
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  .dashboard-header, 
+  .filters, 
+  .pagination, 
+  .dashboard-footer,
+  #toggleModeBtn,
+  #downloadPdfBtn {
+    display: none !important; /* Ocultar elementos no deseados en la impresión */
+  }
+  .dashboard-main {
+    padding: 0 !important; /* Quitar padding extra */
+  }
+  .card-style, .chart-card {
+     box-shadow: none !important; /* Quitar sombras */
+     border: 1px solid #ccc !important; /* Añadir borde simple */
+     margin-bottom: 1cm !important; /* Espacio entre secciones */
+     page-break-inside: avoid !important; /* Intentar evitar que las tarjetas se corten */
+  }
+  .table-responsive {
+      overflow: visible !important; /* Mostrar toda la tabla */
+  }
+  /* Forzar colores claros en modo oscuro al imprimir (a veces necesario) */
+  body.dark-mode .card-style, body.dark-mode .chart-card {
+    background-color: #fff !important;
+    border-color: #ccc !important;
+  }
+   body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode p, body.dark-mode span, body.dark-mode td, body.dark-mode th {
+       color: #000 !important;
+   }
+    /* Podrían necesitarse más ajustes específicos */
+}
+
+
