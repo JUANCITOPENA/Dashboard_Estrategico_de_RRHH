@@ -29,33 +29,48 @@
       </div>
     </header>
 
-    <main class="dashboard-main">
-       <section class="executive-summary card-style"> 
+main class="dashboard-main" id="mainDashboardContent">
+       <section class="executive-summary card-style" id="summarySection"> 
         <h2><i class="fas fa-file-alt"></i> Resumen Ejecutivo del Periodo</h2>
         <div id="executiveSummaryContent">
           <p>Calculando resumen...</p> 
         </div>
       </section>
 
-      <section class="charts-grid">
+      <!-- ******** NUEVA ESTRUCTURA DE GRÁFICOS ******** -->
+
+      <!-- Sección de Gráficos 1 (4 gráficos) -->
+      <section class="charts-grid" id="chartsSection1">
         <div class="chart-card"><h3><i class="fas fa-venus-mars"></i> Género (Activos)</h3><canvas id="chartGenero"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-sitemap"></i> Empleados Activos por Depto.</h3><canvas id="chartDepartamento"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Tipos de Salida (Periodo)</h3><canvas id="chartTiposSalida"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-sign-out-alt"></i> Motivos de Salida Principales</h3><canvas id="chartMotivosSalida"></canvas></div>
-        
+      </section>
+
+      <!-- Sección de Gráficos 2 (siguientes 4 gráficos) -->
+      <section class="charts-grid" id="chartsSection2">
         <div class="chart-card"><h3><i class="fas fa-wallet"></i> Distribución Salarios (Activos)</h3><canvas id="chartSalariosDist"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-tachometer-alt"></i> Distribución Desempeño (Activos)</h3><canvas id="chartDesempenoDist"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-history"></i> Distribución Antigüedad (Activos)</h3><canvas id="chartAntiguedad"></canvas></div>
         <div class="chart-card"><h3><i class="fas fa-briefcase"></i> Tipos de Contrato (Activos)</h3><canvas id="chartTipoContrato"></canvas></div>
+      </section>
 
+      <!-- Sección para el gráfico de Tasa de Rotación Mensual (1 gráfico full-width) -->
+      <section class="charts-grid" id="chartsSectionRotacion"> <!-- Podrías usar una clase diferente si necesitas estilos específicos -->
         <div class="chart-card full-width"><h3><i class="fas fa-chart-area"></i> Tasa de Rotación Mensual (Periodo)</h3><canvas id="chartRotacionMensual"></canvas></div>
+      </section>
+      
+      <!-- Sección para el gráfico de Salario Promedio por Nivel de Desempeño (1 gráfico full-width) -->
+      <section class="charts-grid" id="chartsSectionSalarioDesempeno"> <!-- Podrías usar una clase diferente -->
         <div class="chart-card full-width">
             <h3><i class="fas fa-balance-scale"></i> Salario Promedio por Nivel de Desempeño (Activos)</h3>
             <canvas id="chartAvgSalarioPorNivelDesempeno"></canvas>
         </div>
       </section>
+      
+      <!-- ******** FIN NUEVA ESTRUCTURA DE GRÁFICOS ******** -->
 
-      <section class="table-section">
+      <section class="table-section card-style" id="tableSection">
         <div class="table-header">
             <h2><i class="fas fa-table"></i> Detalle de Empleados</h2>
             <div class="filters">
@@ -65,7 +80,6 @@
               </select>
               <select id="filterEstadoActual" aria-label="Filtrar por estado actual">
                 <option value="">Todos los Estados</option>
-                <!-- Opciones generadas por JS -->
               </select>
             </div>
         </div>
@@ -73,19 +87,7 @@
           <table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nombre Completo</th>
-                <th>Edad</th>
-                <th>Depto.</th>
-                <th>Cargo</th>
-                <th>Contrato</th>
-                <th>Ingreso</th>
-                <th>Antigüedad</th>
-                <th>Salario Base</th>
-                <th>Desempeño</th>
-                <th>Estado</th>
-                <th>Fecha Salida</th>
-                <th>Motivo Salida</th>
+                <th>ID</th><th>Nombre Completo</th><th>Edad</th><th>Depto.</th><th>Cargo</th><th>Contrato</th><th>Ingreso</th><th>Antigüedad</th><th>Salario Base</th><th>Desempeño</th><th>Estado</th><th>Fecha Salida</th><th>Motivo Salida</th>
               </tr>
             </thead>
             <tbody id="employeeTableBody">
@@ -100,7 +102,6 @@
         </div>
       </section>
     </main>
-
     <footer class="dashboard-footer">
       <div class="footer-content">
         <p class="copyright">© <span id="currentYear"></span> Juancito Pena. - Dashboard de RRHH. Todos los derechos reservados.</p>
